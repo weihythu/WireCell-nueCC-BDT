@@ -57,12 +57,14 @@ int main(int argc, char* argv[]){
     int run, subrun, event;
     int nueTag;
     int recoFC;
+    float Evis;
     int truth_nue;
     int truth_CC;
     int truth_inFV;
     int truth_cosmic;
     float trueEnu;
     float weight, lowEweight;
+    float GENIEweight, LEEweight;
     float trueEdep;
     float nuvtx_diff;
     float showervtx_diff;
@@ -72,6 +74,7 @@ int main(int argc, char* argv[]){
     T->SetBranchAddress("event",&event);
     T->SetBranchAddress("nueTag",&nueTag);
     T->SetBranchAddress("recoFC",&recoFC);
+    T->SetBranchAddress("Evis",&Evis);
     if(_MC_){
     T->SetBranchAddress("truth_nue",&truth_nue);
     T->SetBranchAddress("truth_CC",&truth_CC);
@@ -80,6 +83,8 @@ int main(int argc, char* argv[]){
     T->SetBranchAddress("trueEnu",&trueEnu);
     T->SetBranchAddress("weight",&weight);
     T->SetBranchAddress("lowEweight",&lowEweight);
+    T->SetBranchAddress("GENIEweight",&GENIEweight);
+    T->SetBranchAddress("LEEweight",&LEEweight);
     T->SetBranchAddress("trueEdep",&trueEdep);
     T->SetBranchAddress("nuvtx_diff",&nuvtx_diff);
     T->SetBranchAddress("showervtx_diff",&showervtx_diff);
@@ -1037,6 +1042,9 @@ int main(int argc, char* argv[]){
 
     // additional variable considered in the training
     float mip_energy_f = 0;
+    float mip_quality_n_showers_f = 0;
+    float mip_quality_n_tracks_f = 0;
+    float mip_medium_dQ_dx_f = 0;
     /* float gap_energy_f = 0; */ 
     /* float gap_flag_single_shower_f = 0; */ 
     /* float gap_num_valid_tracks_f = 0; */ 
@@ -1064,6 +1072,7 @@ int main(int argc, char* argv[]){
     sig->Branch("event",&event, "event/I");
     sig->Branch("nueTag",&nueTag, "nueTag/I");
     sig->Branch("recoFC",&recoFC, "recoFC/I");
+    sig->Branch("Evis",&Evis, "Evis/F");
     if(_MC_){
     sig->Branch("truth_nue",&truth_nue, "truth_nue/I");
     sig->Branch("truth_CC",&truth_CC, "truth_CC/I");
@@ -1072,11 +1081,16 @@ int main(int argc, char* argv[]){
     sig->Branch("trueEnu",&trueEnu, "trueEnu/F");
     sig->Branch("weight",&weight, "weight/F");
     sig->Branch("lowEweight",&lowEweight, "lowEweight/F");
+    sig->Branch("GENIEweight",&GENIEweight, "GENIEweight/F");
+    sig->Branch("LEEweight",&LEEweight, "LEEweight/F");
     sig->Branch("trueEdep",&trueEdep, "trueEdep/F");
     sig->Branch("nuvtx_diff",&nuvtx_diff, "nuvtx_diff/F");
     sig->Branch("showervtx_diff",&showervtx_diff, "showervtx_diff/F");
     }
     sig->Branch("mip_energy", &mip_energy_f, "mip_energy/F");
+    sig->Branch("mip_quality_n_showers", &mip_quality_n_showers_f, "mip_quality_n_showers/F");
+    sig->Branch("mip_quality_n_tracks", &mip_quality_n_tracks_f, "mip_quality_n_tracks/F");
+    sig->Branch("mip_medium_dQ_dx", &mip_medium_dQ_dx_f, "mip_medium_dQ_dx/F");
     /* sig->Branch("gap_energy", &gap_energy_f, "gap_energy/F"); */ 
     /* sig->Branch("gap_flag_single_shower", &gap_flag_single_shower_f, "gap_flag_single_shower/F"); */ 
     /* sig->Branch("gap_num_valid_tracks", &gap_num_valid_tracks_f, "gap_num_valid_tracks/F"); */ 
@@ -1943,6 +1957,9 @@ int main(int argc, char* argv[]){
     rest_flag = 1; // for any specific test 
 
     mip_energy_f = mip_energy;
+    mip_quality_n_showers_f = mip_quality_n_showers;
+    mip_quality_n_tracks_f = mip_quality_n_tracks;
+    mip_medium_dQ_dx_f = mip_medium_dQ_dx;
     /* gap_energy_f = gap_energy; */ 
     /* gap_flag_single_shower_f = gap_flag_single_shower; */ 
     /* gap_num_valid_tracks_f = gap_num_valid_tracks; */ 

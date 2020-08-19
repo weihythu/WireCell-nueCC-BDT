@@ -239,7 +239,9 @@ void TestEvaluate(TString filename, double min, double max, int nbins, float BDT
   Float_t showervtx_diff;  
   Float_t weight;
   Float_t lowEweight;
-    
+  Float_t GENIEweight;
+  Float_t LEEweight;
+
   Float_t mip_energy = 0;
   Float_t mip_vec_dQ_dx_0 = 0;
   Float_t mip_vec_dQ_dx_1 = 0;
@@ -739,6 +741,18 @@ void TestEvaluate(TString filename, double min, double max, int nbins, float BDT
     bkgR2->Write("", TObject::kOverwrite);
     round2->Close();
     ////
+    
+    TFile* check = new TFile("check.root","RECREATE");
+    roc->SetName("ROC");
+    roc->Write();
+    geff->SetName("Eff");
+    geff->Write();
+    gpurity->SetName("Purity");
+    gpurity->Write();
+    hseff_bdt->Write();
+    hbeff_bdt->Write();
+    hpurity_bdt->Write();
+    check->Close();
 }
 
 void GetROC(TH1F* hs, TH1F* hb, TGraph* roc)
