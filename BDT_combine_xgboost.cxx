@@ -1426,7 +1426,7 @@ void TestEvaluate(TString filename, double min, double max, int nbins, float BDT
     reader->AddVariable("br4_2_angle",&br4_2_angle_f);
     reader->AddVariable("tro_3_stem_length",&tro_3_stem_length_f);
     reader->AddVariable("tro_3_n_muon_segs",&tro_3_n_muon_segs_f);
-    reader->AddVariable("br4_1_br4_1_n_main_segs",&br4_1_n_main_segs_f);
+    reader->AddVariable("br4_1_br4_1_n_main_segs",&br4_1_n_main_segs_f); // naming issue
 
     //reader->BookMVA( "MyBDT", "dataset_combine/weights/BDTcombine_BDT800_3.weights.xml");
     reader->BookMVA( "MyBDT", "xgboost_set8_kaicheng.xml");
